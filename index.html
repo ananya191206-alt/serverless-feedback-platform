@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Intelligence Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Feedback Intelligence Platform</h1>
+
+    <p>Submit your feedback</p>
+
+    <form id="feedbackForm">
+
+        <input type="text" id="name" placeholder="Your Name" required>
+
+        <input type="text" id="event" placeholder="Event / Service" required>
+
+        <select id="category" required>
+            <option value="">Select Category</option>
+            <option value="Event">Event</option>
+            <option value="Teaching">Teaching</option>
+            <option value="Facilities">Facilities</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <select id="rating" required>
+            <option value="">Rating</option>
+            <option value="1">1 - Very Poor</option>
+            <option value="2">2 - Poor</option>
+            <option value="3">3 - Average</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
+        </select>
+
+        <textarea id="message"
+            placeholder="Write your feedback"
+            required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+
+    </form>
+
+    <h2>Feedback Records</h2>
+
+    <div id="feedbackList"></div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
