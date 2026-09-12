@@ -1,52 +1,432 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Feedback Intelligence Platform</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feedback Management System</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Feedback Intelligence Platform</h1>
+    <header>
+        <div class="header-container">
+            <h1>Feedback Management System</h1>
+            <p>Submit and manage feedback for events, teaching and facilities.</p>
+        </div>
+    </header>
 
-    <p>Submit your feedback</p>
 
-    <form id="feedbackForm">
+    <main>
 
-        <input type="text" id="name" placeholder="Your Name" required>
+        <!-- Submit Feedback -->
 
-        <input type="text" id="event" placeholder="Event / Service" required>
+        <section class="section">
 
-        <select id="category" required>
-            <option value="">Select Category</option>
-            <option value="Event">Event</option>
-            <option value="Teaching">Teaching</option>
-            <option value="Facilities">Facilities</option>
-            <option value="Other">Other</option>
-        </select>
+            <h2>Submit Feedback</h2>
 
-        <select id="rating" required>
-            <option value="">Rating</option>
-            <option value="1">1 - Very Poor</option>
-            <option value="2">2 - Poor</option>
-            <option value="3">3 - Average</option>
-            <option value="4">4 - Good</option>
-            <option value="5">5 - Excellent</option>
-        </select>
+            <p class="section-description">
+                Share your experience and help improve our services.
+            </p>
 
-        <textarea id="message"
-            placeholder="Write your feedback"
-            required></textarea>
+            <form id="feedbackForm">
 
-        <button type="submit">Submit Feedback</button>
+                <div class="form-group">
 
-    </form>
+                    <label for="name">Name</label>
 
-    <h2>Feedback Records</h2>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
 
-    <div id="feedbackList"></div>
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="event">Event / Service</label>
+
+                    <input
+                        type="text"
+                        id="event"
+                        placeholder="Enter event or service name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="category">Category</label>
+
+                    <select id="category" required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Event">
+                            Event
+                        </option>
+
+                        <option value="Teaching">
+                            Teaching
+                        </option>
+
+                        <option value="Facilities">
+                            Facilities
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Rating</label>
+
+                    <div class="stars">
+
+                        <button
+                            type="button"
+                            class="star"
+                            data-rating="1">
+                            ☆
+                        </button>
+
+                        <button
+                            type="button"
+                            class="star"
+                            data-rating="2">
+                            ☆
+                        </button>
+
+                        <button
+                            type="button"
+                            class="star"
+                            data-rating="3">
+                            ☆
+                        </button>
+
+                        <button
+                            type="button"
+                            class="star"
+                            data-rating="4">
+                            ☆
+                        </button>
+
+                        <button
+                            type="button"
+                            class="star"
+                            data-rating="5">
+                            ☆
+                        </button>
+
+                    </div>
+
+                    <input
+                        type="hidden"
+                        id="rating"
+                    >
+
+                    <small id="ratingText">
+                        Select a rating
+                    </small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">Feedback</label>
+
+                    <textarea
+                        id="message"
+                        rows="5"
+                        placeholder="Write your feedback"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="submitBtn"
+                    class="submit-button">
+                    Submit Feedback
+                </button>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- Feedback Records -->
+
+        <section class="section">
+
+            <div class="records-heading">
+
+                <div>
+
+                    <h2>Feedback Records</h2>
+
+                    <p class="section-description">
+                        View and manage submitted feedback.
+                    </p>
+
+                </div>
+
+                <span id="feedbackCount">
+                    0 responses
+                </span>
+
+            </div>
+
+
+            <div class="search">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search feedback..."
+                >
+
+            </div>
+
+
+            <div class="filters">
+
+                <select id="filterCategory">
+
+                    <option value="All">
+                        All Categories
+                    </option>
+
+                    <option value="Event">
+                        Event
+                    </option>
+
+                    <option value="Teaching">
+                        Teaching
+                    </option>
+
+                    <option value="Facilities">
+                        Facilities
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <select id="sortFeedback">
+
+                    <option value="newest">
+                        Newest First
+                    </option>
+
+                    <option value="oldest">
+                        Oldest First
+                    </option>
+
+                    <option value="highest">
+                        Highest Rating
+                    </option>
+
+                    <option value="lowest">
+                        Lowest Rating
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div id="feedbackList">
+
+                <div class="empty-state">
+
+                    <h3>No feedback found</h3>
+
+                    <p>
+                        Submitted feedback will appear here.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- Analytics -->
+
+        <section class="section">
+
+            <h2>Feedback Summary</h2>
+
+            <p class="section-description">
+                Overview of the submitted feedback.
+            </p>
+
+
+            <div class="summary">
+
+                <div class="summary-box">
+
+                    <p>Total Feedback</p>
+
+                    <h3 id="totalFeedback">
+                        0
+                    </h3>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <p>Average Rating</p>
+
+                    <h3 id="averageRating">
+                        0.0
+                    </h3>
+
+                </div>
+
+
+                <div class="summary-box">
+
+                    <p>Categories</p>
+
+                    <h3 id="categoryCount">
+                        0
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart">
+
+                <h3>Rating Distribution</h3>
+
+
+                <div class="chart-row">
+
+                    <span>5 ★</span>
+
+                    <div class="bar-background">
+                        <div id="bar5" class="bar"></div>
+                    </div>
+
+                    <span id="count5">0</span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span>4 ★</span>
+
+                    <div class="bar-background">
+                        <div id="bar4" class="bar"></div>
+                    </div>
+
+                    <span id="count4">0</span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span>3 ★</span>
+
+                    <div class="bar-background">
+                        <div id="bar3" class="bar"></div>
+                    </div>
+
+                    <span id="count3">0</span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span>2 ★</span>
+
+                    <div class="bar-background">
+                        <div id="bar2" class="bar"></div>
+                    </div>
+
+                    <span id="count2">0</span>
+
+                </div>
+
+
+                <div class="chart-row">
+
+                    <span>1 ★</span>
+
+                    <div class="bar-background">
+                        <div id="bar1" class="bar"></div>
+                    </div>
+
+                    <span id="count1">0</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- Toast -->
+
+    <div id="toast" class="toast">
+
+        <span id="toastMessage">
+            Done
+        </span>
+
+    </div>
+
+
+
+    <footer>
+
+        <p>Feedback Management System</p>
+
+        <small>
+            Cloud-based feedback application
+        </small>
+
+    </footer>
+
 
     <script src="script.js"></script>
 
 </body>
+
 </html>
